@@ -92,22 +92,70 @@ function radioClick(name) {
 
 class ChatBubble extends React.Component {
   generateBubbles(msg) {
-    if (msg.sender_name == myName) {
+    var senderName = msg.sender_name || msg.senderName;
+    var content = msg.content || msg.text;
+    var timestamp = msg.timestamp_ms || msg.timestamp;
+    var media = msg.media || [];
+    
+    var bubbleContent = [];
+    
+    // Add text content if exists
+    if (content) {
+      bubbleContent.push(e('div', {}, content));
+    }
+    
+    // Add media if exists
+    if (media && media.length > 0) {
+      media.forEach(mediaItem => {
+        if (mediaItem.uri) {
+          var mediaPath = mediaItem.uri.replace('../', '');
+          var fileExtension = mediaPath.split('.').pop().toLowerCase();
+          
+          if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExtension)) {
+            bubbleContent.push(
+              e('img', {
+                src: mediaPath,
+                style: {maxWidth: '200px', maxHeight: '200px', borderRadius: '8px', margin: '5px 0'},
+                alt: 'Image'
+              })
+            );
+          } else if (['mp4', 'mov', 'avi', 'webm'].includes(fileExtension)) {
+            bubbleContent.push(
+              e('video', {
+                src: mediaPath,
+                controls: true,
+                style: {maxWidth: '200px', maxHeight: '200px', borderRadius: '8px', margin: '5px 0'}
+              })
+            );
+          } else {
+            bubbleContent.push(
+              e('a', {
+                href: mediaPath,
+                target: '_blank',
+                style: {color: '#0084ff', textDecoration: 'underline'}
+              }, `📎 ${mediaPath.split('/').pop()}`)
+            );
+          }
+        }
+      });
+    }
+    
+    if (senderName == myName) {
       return (
         e(
           'div', {className: "message-container"}, 
-          e('div', {className: "name-right"}, msg.sender_name),
-          e('div', {className: "bubble-right"}, msg.content),
-          e('span', {className: "tooltip-right"}, timeConverter(msg.timestamp_ms))
+          e('div', {className: "name-right"}, senderName),
+          e('div', {className: "bubble-right"}, bubbleContent),
+          e('span', {className: "tooltip-right"}, timeConverter(timestamp))
         )
       );
     } else {
       return (
         e(
           'div', {className: "message-container"}, 
-          e('div', {className: "name-left"}, msg.sender_name),
-          e('div', {className: "bubble-left"}, msg.content),
-          e('span', {className: "tooltip-left"}, timeConverter(msg.timestamp_ms))
+          e('div', {className: "name-left"}, senderName),
+          e('div', {className: "bubble-left"}, bubbleContent),
+          e('span', {className: "tooltip-left"}, timeConverter(timestamp))
         )
       );
     }
