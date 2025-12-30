@@ -178,14 +178,13 @@ class ChatArea extends React.Component {
 
 function timeConverter(UNIX_timestamp){
   var a = new Date(UNIX_timestamp);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes() < 10 ? '0' + a.getMinutes() : a.getMinutes();
-  var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+  var month = (a.getMonth() + 1).toString().padStart(2, '0');
+  var date = a.getDate().toString().padStart(2, '0');
+  var hour = a.getHours().toString().padStart(2, '0');
+  var min = a.getMinutes().toString().padStart(2, '0');
+  var sec = a.getSeconds().toString().padStart(2, '0');
+  var time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec;
   return time;
 }
 
