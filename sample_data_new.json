@@ -1,0 +1,90 @@
+{
+  "participants": ["Alice", "Bob"],
+  "messages": [
+    {
+      "senderName": "Alice",
+      "timestamp": 1640995200000,
+      "text": "Check out this screenshot! 📸",
+      "media": [
+        {
+          "uri": "img/rawjson.png",
+          "creation_timestamp": 1640995200
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": "👍",
+          "actor": "Bob"
+        },
+        {
+          "reaction": "😍",
+          "actor": "Bob"
+        }
+      ]
+    },
+    {
+      "senderName": "Bob",
+      "timestamp": 1640995150000,
+      "text": "That looks amazing! Here's another view:",
+      "media": [
+        {
+          "uri": "img/rawjson.png",
+          "creation_timestamp": 1640995150
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": "❤️",
+          "actor": "Alice"
+        },
+        {
+          "reaction": "🔥",
+          "actor": "Alice"
+        }
+      ]
+    },
+    {
+      "senderName": "Alice",
+      "timestamp": 1640995100000,
+      "text": "Perfect timing! 🎯",
+      "reactions": [
+        {
+          "reaction": "💯",
+          "actor": "Bob"
+        }
+      ]
+    },
+    {
+      "senderName": "Bob",
+      "timestamp": 1640995050000,
+      "media": [
+        {
+          "uri": "img/rawjson.png",
+          "creation_timestamp": 1640995050
+        }
+      ],
+      "reactions": [
+        {
+          "reaction": "👀",
+          "actor": "Alice"
+        }
+      ]
+    },
+    {
+      "senderName": "Alice",
+      "timestamp": 1640995000000,
+      "text": "Hey! How's it going? 😊",
+      "reactions": [
+        {
+          "reaction": "😊",
+          "actor": "Bob"
+        },
+        {
+          "reaction": "👋",
+          "actor": "Bob"
+        }
+      ]
+    }
+  ],
+  "threadName": "Alice and Bob Chat"
+}
