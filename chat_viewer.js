@@ -43,7 +43,7 @@ function cleanData(raw) {
     typeof person === 'string' ? person : person.name
   );
   var title = raw.title || raw.threadName;
-  var msgs = raw.messages.reverse();
+  var msgs = raw.messages; // Remove .reverse() to keep chronological order
   var cleaned = {
     "participants": participants,
     "title": title,
