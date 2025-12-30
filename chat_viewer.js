@@ -145,18 +145,16 @@ class ChatBubble extends React.Component {
       return (
         e(
           'div', {className: "message-container"}, 
-          e('div', {className: "name-right"}, senderName),
-          e('div', {className: "bubble-right"}, bubbleContent),
-          e('span', {className: "tooltip-right"}, timeConverter(timestamp))
+          e('div', {className: "name-right"}, `${senderName} @ ${timeConverter(timestamp)}`),
+          e('div', {className: "bubble-right"}, bubbleContent)
         )
       );
     } else {
       return (
         e(
           'div', {className: "message-container"}, 
-          e('div', {className: "name-left"}, senderName),
-          e('div', {className: "bubble-left"}, bubbleContent),
-          e('span', {className: "tooltip-left"}, timeConverter(timestamp))
+          e('div', {className: "name-left"}, `${senderName} @ ${timeConverter(timestamp)}`),
+          e('div', {className: "bubble-left"}, bubbleContent)
         )
       );
     }
