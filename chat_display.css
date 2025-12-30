@@ -118,3 +118,24 @@ p, label {
     text-align: left;
 
 }
+
+.media-frame-left {
+    font-family: sans-serif;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: transparent;
+    width: auto;
+    display: inline-block;
+}
+
+.media-frame-right {
+    font-family: sans-serif;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: transparent;
+    width: auto;
+    display: inline-block;
+    float: right;
+}

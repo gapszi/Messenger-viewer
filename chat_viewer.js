@@ -98,6 +98,7 @@ class ChatBubble extends React.Component {
     var media = msg.media || [];
     
     var bubbleContent = [];
+    var hasMedia = media && media.length > 0;
     
     // Add text content if exists
     if (content) {
@@ -105,7 +106,7 @@ class ChatBubble extends React.Component {
     }
     
     // Add media if exists
-    if (media && media.length > 0) {
+    if (hasMedia) {
       media.forEach(mediaItem => {
         if (mediaItem.uri) {
           var mediaPath = mediaItem.uri.replace('../', '');
@@ -141,23 +142,21 @@ class ChatBubble extends React.Component {
       });
     }
     
-    if (senderName == myName) {
-      return (
-        e(
-          'div', {className: "message-container"}, 
-          e('div', {className: "name-right"}, `${senderName} @ ${timeConverter(timestamp)}`),
-          e('div', {className: "bubble-right"}, bubbleContent)
-        )
-      );
+    var bubbleClass;
+    if (hasMedia && !content) {
+      bubbleClass = senderName == myName ? 'media-frame-right' : 'media-frame-left';
     } else {
-      return (
-        e(
-          'div', {className: "message-container"}, 
-          e('div', {className: "name-left"}, `${senderName} @ ${timeConverter(timestamp)}`),
-          e('div', {className: "bubble-left"}, bubbleContent)
-        )
-      );
+      bubbleClass = senderName == myName ? 'bubble-right' : 'bubble-left';
     }
+    var nameClass = senderName == myName ? 'name-right' : 'name-left';
+    
+    return (
+      e(
+        'div', {className: "message-container"}, 
+        e('div', {className: nameClass}, `${senderName} @ ${timeConverter(timestamp)}`),
+        e('div', {className: bubbleClass}, bubbleContent)
+      )
+    );
 
   }
   render() {
