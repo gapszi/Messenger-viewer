@@ -115,8 +115,9 @@ class ChatBubble extends React.Component {
             bubbleContent.push(
               e('img', {
                 src: mediaPath,
-                style: {maxWidth: '200px', maxHeight: '200px', borderRadius: '8px', margin: '5px 0'},
-                alt: 'Image'
+                style: {maxWidth: '200px', maxHeight: '200px', borderRadius: '8px', margin: '5px 0', cursor: 'pointer'},
+                alt: 'Image',
+                onClick: () => showImagePopup(mediaPath)
               })
             );
           } else if (['mp4', 'mov', 'avi', 'webm'].includes(fileExtension)) {
@@ -188,4 +189,34 @@ function timeConverter(UNIX_timestamp){
   var sec = a.getSeconds() < 10 ? '0' + a.getSeconds() : a.getSeconds();
   var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
   return time;
+}
+
+function showImagePopup(imageSrc) {
+  const popup = document.createElement('div');
+  popup.id = 'image-popup';
+  popup.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:1000;cursor:pointer';
+  
+  const img = document.createElement('img');
+  img.src = imageSrc;
+  img.style.cssText = 'max-width:90%;max-height:90%;object-fit:contain';
+  
+  popup.appendChild(img);
+  document.body.appendChild(popup);
+  
+  popup.onclick = closeImagePopup;
+  document.addEventListener('keydown', handleEscapeKey);
+}
+
+function closeImagePopup() {
+  const popup = document.getElementById('image-popup');
+  if (popup) {
+    popup.remove();
+    document.removeEventListener('keydown', handleEscapeKey);
+  }
+}
+
+function handleEscapeKey(event) {
+  if (event.key === 'Escape') {
+    closeImagePopup();
+  }
 }
