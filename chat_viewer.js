@@ -39,8 +39,10 @@ function readJSON(file) {
 }
 
 function cleanData(raw) {
-  var participants = raw.participants.map(person => person.name);
-  var title = raw.title;
+  var participants = raw.participants.map(person => 
+    typeof person === 'string' ? person : person.name
+  );
+  var title = raw.title || raw.threadName;
   var msgs = raw.messages.reverse();
   var cleaned = {
     "participants": participants,
