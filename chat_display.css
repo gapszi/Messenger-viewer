@@ -139,3 +139,17 @@ p, label {
     display: inline-block;
     float: right;
 }
+
+.reactions-right {
+    text-align: right;
+    margin-top: 2px;
+    font-size: 14px;
+    clear: both;
+}
+
+.reactions-left {
+    text-align: left;
+    margin-top: 2px;
+    font-size: 14px;
+    clear: both;
+}

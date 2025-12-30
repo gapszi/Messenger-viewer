@@ -96,6 +96,7 @@ class ChatBubble extends React.Component {
     var content = msg.content || msg.text;
     var timestamp = msg.timestamp_ms || msg.timestamp;
     var media = msg.media || [];
+    var reactions = msg.reactions || [];
     
     var bubbleContent = [];
     var hasMedia = media && media.length > 0;
@@ -150,13 +151,34 @@ class ChatBubble extends React.Component {
     }
     var nameClass = senderName == myName ? 'name-right' : 'name-left';
     
-    return (
-      e(
-        'div', {className: "message-container"}, 
-        e('div', {className: nameClass}, `${senderName} @ ${timeConverter(timestamp)}`),
-        e('div', {className: bubbleClass}, bubbleContent)
-      )
-    );
+    var messageElements = [
+      e('div', {className: nameClass}, `${senderName} @ ${timeConverter(timestamp)}`),
+      e('div', {className: bubbleClass}, bubbleContent)
+    ];
+    
+    // Add reactions if they exist
+    if (reactions && reactions.length > 0) {
+      var reactionElements = reactions.map(reaction => {
+        return e('span', {
+          style: {
+            fontSize: '16px', 
+            margin: '0 2px',
+            color: reaction.reaction.charCodeAt(0) === 10084 ? 'red' : 'inherit'
+          },
+          title: reaction.actor
+        }, reaction.reaction);
+      });
+      
+      var reactionClass = senderName == myName ? 'reactions-right' : 'reactions-left';
+      
+      messageElements.push(
+        e('div', {
+          className: reactionClass
+        }, reactionElements)
+      );
+    }
+    
+    return e('div', {className: "message-container"}, messageElements);
 
   }
   render() {
