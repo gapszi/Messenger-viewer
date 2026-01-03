@@ -34,8 +34,6 @@ function readJSON(file) {
   });
 
   reader.readAsText(file);
-
-  
 }
 
 function cleanData(raw) {
