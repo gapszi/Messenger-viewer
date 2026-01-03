@@ -110,7 +110,7 @@ class ChatBubble extends React.Component {
     if (hasMedia) {
       media.forEach(mediaItem => {
         if (mediaItem.uri) {
-          var mediaPath = mediaItem.uri.replace('../', '');
+          var mediaPath = mediaItem.uri.replace('./media', './messages/media');
           var fileExtension = mediaPath.split('.').pop().toLowerCase();
           
           if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExtension)) {
