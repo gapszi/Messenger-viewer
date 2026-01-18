@@ -112,12 +112,10 @@ class ChatBubble extends React.Component {
           var fileExtension = mediaPath.split('.').pop().toLowerCase();
           
           if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(fileExtension)) {
+            const imgHtml = `<img src="${mediaPath}" style="max-width:200px;max-height:200px;border-radius:8px;margin:5px 0;cursor:pointer" alt="Image" onclick="showImagePopup(this.src)" />`;
             bubbleContent.push(
-              e('img', {
-                src: mediaPath,
-                style: {maxWidth: '200px', maxHeight: '200px', borderRadius: '8px', margin: '5px 0', cursor: 'pointer'},
-                alt: 'Image',
-                onClick: () => showImagePopup(mediaPath)
+              e('span', {
+                dangerouslySetInnerHTML: {__html: imgHtml}
               })
             );
           } else if (['mp4', 'mov', 'avi', 'webm'].includes(fileExtension)) {
